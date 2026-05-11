@@ -23,7 +23,7 @@ public class PaymentService {
 
         // 🔁 Idempotency check
         if (paymentRepository.findByTransactionId(request.getTransactionId()).isPresent()) {
-            return new PaymentResponse(null, "FAILED", "Duplicate transaction");
+            return new PaymentResponse(null, "FAILED", "transaction is Duplicate");
         }
 
         // 💳 Simulate payment logic
@@ -55,7 +55,7 @@ public class PaymentService {
         return new PaymentResponse(
                 saved.getId(),
                 status.name(),
-                paymentSuccess ? "Payment Successful" : "Payment Failed"
+                paymentSuccess ? "Payment Successful" : "Payment is Failed"
         );
     }
 }
