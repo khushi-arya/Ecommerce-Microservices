@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+
+  eurekaserver:
+    build: ./Eurekaserver
+    ports:
+      - "8761:8761"
+    container_name: eurekaserver
+
+  apigateway:
+    build: ./APIgateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eurekaserver
+    container_name: apigateway
+
+  userservice:
+    build: ./userservice
+    depends_on:
+      - eurekaserver
+
+  productservice:
+    build: ./productservice
+    depends_on:
+      - eurekaserver
+
+  cartservice:
+    build: ./cartservice
+    depends_on:
+      - eurekaserver
+
+  orderservice:
+    build: ./orderservice
+    depends_on:
+      - eurekaserver
+
+  inventoryservice:
+    build: ./inverntoryservice
+    depends_on:
+      - eurekaserver
+
+  paymentservice:
+    build: ./paymentservice
+    depends_on:
+      - eurekaserver
